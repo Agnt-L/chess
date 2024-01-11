@@ -91,8 +91,8 @@ public class Board {
     public void displayBoard() {
         for (int file = 0; file < 8; file++) {
             for (int rank = 0; rank < 8; rank++) {
-                if (board[file][rank] != null) {
-                    System.out.print(board[file][rank].getFen() + " ");
+                if (board[rank][file] != null) {
+                    System.out.print(board[rank][file].getFen() + " ");
                 } else {
                     System.out.print("- ");
                 }
@@ -126,7 +126,7 @@ public class Board {
     }
 
     public Piece getPieceAt(Coordinate coordinate) {
-        Piece piece = this.board[coordinate.getFile()][coordinate.getRank()];
+        Piece piece = this.board[coordinate.getRank()][coordinate.getFile()];
         return piece;
     }
 }

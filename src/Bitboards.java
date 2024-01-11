@@ -17,7 +17,7 @@ public class Bitboards {
         for (Coordinate coord: coordList) {
             int rank = coord.getRank();
             int file = coord.getFile();
-            int index = rank * 8 + 8 - file;
+            int index = rank * 8 + file;
             combinedBitboard = combinedBitboard.setBit(index);
         }
         return combinedBitboard;

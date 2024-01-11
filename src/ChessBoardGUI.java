@@ -30,8 +30,8 @@ public class ChessBoardGUI extends JFrame {
                 CircleButton button = new CircleButton();
                 button.setPreferredSize(new Dimension(SQUARE_SIZE, SQUARE_SIZE));
                 if ((file + rank) % 2 == 1) button.setBackground(Color.gray);
-                button.addActionListener(new ChessButtonListener(file, rank));
-                boardButtons[rank][file] = button;
+                button.addActionListener(new ChessButtonListener(rank=rank, file = file));
+                boardButtons[file][rank] = button;
                 add(button);
             }
         }
