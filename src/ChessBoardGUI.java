@@ -1,13 +1,15 @@
-import javax.lang.model.type.NullType;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+import java.util.List;
 
 public class ChessBoardGUI extends JFrame {
     private static final int SQUARE_SIZE = 80;
     private static final int ICON_SIZE = (int) (0.85 * SQUARE_SIZE);
-    private JButton[][] boardButtons;
+    private CircleButton[][] boardButtons;
     private Board chessBoard;
 
     private Coordinate firstClickedCoord;
@@ -21,11 +23,11 @@ public class ChessBoardGUI extends JFrame {
     private void initializeGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(8, 8));
-        boardButtons = new JButton[8][8];
+        boardButtons = new CircleButton[8][8];
 
         for (int file = 0; file < 8; file++) {
             for (int rank = 0; rank < 8; rank++) {
-                JButton button = new JButton();
+                CircleButton button = new CircleButton();
                 button.setPreferredSize(new Dimension(SQUARE_SIZE, SQUARE_SIZE));
                 if ((file + rank) % 2 == 1) button.setBackground(Color.gray);
                 button.addActionListener(new ChessButtonListener(file, rank));
@@ -89,6 +91,13 @@ public class ChessBoardGUI extends JFrame {
             System.out.println("Clicked: " + rank + ", " + file);
             if (firstClickedCoord == null) {
                 firstClickedCoord = new Coordinate(rank, file);
+                Piece selectedPiece = chessBoard.getPieceAt(new Coordinate(rank, file));
+                chessBoard.generateMoves(selectedPiece);
+                List<Coordinate> nextCoords = chessBoard.getNextMoves();
+                for (Coordinate coord: nextCoords) {
+                    boardButtons[coord.getFile()][coord.getRank()].setClicked(true);
+                }
+
             } else {
                 chessBoard.movePiece(firstClickedCoord, new Coordinate(rank, file));
                 chessBoard.displayBoard();

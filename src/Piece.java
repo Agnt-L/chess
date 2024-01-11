@@ -1,3 +1,5 @@
+import java.util.List;
+
 public abstract class Piece {
     private int color;
 
@@ -28,7 +30,7 @@ public abstract class Piece {
 
     public abstract boolean isValidMove(Coordinate from, Coordinate to);
 
-    public abstract void generateNextMoves();
+    public abstract List<Coordinate> generateNextMoves();
 
     public int getColor() {
         return color;

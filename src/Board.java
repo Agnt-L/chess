@@ -1,5 +1,13 @@
+import java.util.List;
+
 public class Board {
     private Piece[][] board;
+
+    public List<Coordinate> getNextMoves() {
+        return nextMoves;
+    }
+
+    private List<Coordinate> nextMoves;
 
     public Board() {
         this.board = new Piece[8][8];
@@ -32,7 +40,7 @@ public class Board {
 
         addPiece(new Rook(1), new Coordinate(7, 0)); // Black rooks
         addPiece(new Rook(1), new Coordinate(7, 7));
-/*
+
         // Bishops
         addPiece(new Bishop(0), new Coordinate(0, 2)); // White bishops
         addPiece(new Bishop(0), new Coordinate(0, 5));
@@ -47,7 +55,7 @@ public class Board {
         // Kings
         addPiece(new King(0), new Coordinate(0, 4)); // White king
         addPiece(new King(1), new Coordinate(7, 4)); // Black king
- */
+
         /*
         // Knights
         board[0][1] = new Knight(0); // White knights
@@ -113,7 +121,12 @@ public class Board {
         System.out.println("Piece moved successfully.");
     }
 
+    public void generateMoves(Piece selectedPiece) {
+        this.nextMoves = selectedPiece.generateNextMoves();
+    }
+
     public Piece getPieceAt(Coordinate coordinate) {
-        return this.board[coordinate.getFile()][coordinate.getRank()];
+        Piece piece = this.board[coordinate.getFile()][coordinate.getRank()];
+        return piece;
     }
 }

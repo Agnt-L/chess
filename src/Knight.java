@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Knight extends Piece {
 
     public Knight(int color) {
@@ -13,6 +16,8 @@ public class Knight extends Piece {
     }
 
     @Override
-    public void generateNextMoves() {
+    public List<Coordinate> generateNextMoves() {
+        List<Coordinate> nextCoords = new ArrayList<>();
+        return nextCoords;
     }
 }

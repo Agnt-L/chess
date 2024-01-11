@@ -1,17 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pawn extends Piece {
-    public Pawn(int color) {
-        super(color, "p");
+import static java.lang.Math.abs;
+
+public class Bishop extends Piece{
+    public Bishop(int color) {
+        super(color, "b");
     }
 
     @Override
     public boolean isValidMove(Coordinate from, Coordinate to) {
-        int rowDifference = Math.abs(to.getRank() - from.getRank());
-        int colDifference = Math.abs(to.getFile() - from.getFile());
-
-        return (rowDifference == 1 && colDifference == 0);
+        int rankDif = abs(from.getRank() - to.getRank());
+        int fileDif = abs(from.getFile() - to.getFile());
+        return rankDif == fileDif;
     }
 
     @Override
