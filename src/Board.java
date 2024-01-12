@@ -1,7 +1,9 @@
 import java.util.List;
+import java.util.concurrent.Flow;
 
-public class Board {
+public class Board implements Flow.Publisher {
     private Piece[][] board;
+    private Flow.Subscriber<? super Piece> subscriber;
 
     public List<Coordinate> getNextMoves() {
         return nextMoves;
@@ -131,5 +133,10 @@ public class Board {
     public Piece getPieceAt(Coordinate coordinate) {
         Piece piece = this.board[coordinate.getRank()][coordinate.getFile()];
         return piece;
+    }
+
+    @Override
+    public void subscribe(Flow.Subscriber subscriber) {
+        this.subscriber = subscriber;
     }
 }

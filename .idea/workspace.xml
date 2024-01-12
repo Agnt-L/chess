@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a65c95f4-b7d2-44fd-aaa2-db0dc2d30686" name="Changes" comment="correct Java-2d-array and JButton-array rank and file">
+    <list default="true" id="a65c95f4-b7d2-44fd-aaa2-db0dc2d30686" name="Changes" comment="correct Java-2d-array and JButton-array rank and file again, make getter and setter for their fields">
+      <change afterPath="$PROJECT_DIR$/src/Move.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChessBoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessBoardGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CircleButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CircleButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Queen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705001259795</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="correct Java-2d-array and JButton-array rank and file again, make getter and setter for their fields">
+      <created>1705056546293</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1705056546293</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -149,7 +156,8 @@
     <MESSAGE value="move Pieces with 2 clicks" />
     <MESSAGE value="try to display generated next moves and translate them to bitboards" />
     <MESSAGE value="correct Java-2d-array and JButton-array rank and file" />
-    <option name="LAST_COMMIT_MESSAGE" value="correct Java-2d-array and JButton-array rank and file" />
+    <MESSAGE value="correct Java-2d-array and JButton-array rank and file again, make getter and setter for their fields" />
+    <option name="LAST_COMMIT_MESSAGE" value="correct Java-2d-array and JButton-array rank and file again, make getter and setter for their fields" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -170,33 +178,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ChessBoardGUI.java</url>
-          <line>104</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ChessBoardGUI.java</url>
-          <line>46</line>
+          <line>49</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ChessBoardGUI.java</url>
-          <line>49</line>
-          <option name="timeStamp" value="41" />
+          <line>93</line>
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ChessBoardGUI.java</url>
-          <line>132</line>
-          <option name="timeStamp" value="45" />
+          <line>22</line>
+          <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ChessBoardGUI.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ChessBoardGUI.java</url>
-          <line>66</line>
-          <option name="timeStamp" value="47" />
+          <line>98</line>
+          <option name="timeStamp" value="50" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

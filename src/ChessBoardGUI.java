@@ -5,8 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.concurrent.Flow;
 
-public class ChessBoardGUI extends JFrame {
+public class ChessBoardGUI extends JFrame implements Flow.Subscriber<Move> {
     private static final int SQUARE_SIZE = 80;
     private static final int ICON_SIZE = (int) (0.85 * SQUARE_SIZE);
     private CircleButton[][] boardButtons;
@@ -15,9 +16,11 @@ public class ChessBoardGUI extends JFrame {
     private Coordinate firstClickedCoord;
     private Piece selectedPiece;
     private List<Coordinate> nextCoords;
+    private Flow.Subscription subscription;
 
     public ChessBoardGUI(Board chessBoard) {
         super("Chess Board");
+        chessBoard.subscribe(this);
         this.chessBoard = chessBoard;
         initializeGUI();
     }
@@ -39,7 +42,7 @@ public class ChessBoardGUI extends JFrame {
             for (int file = 0; file < 8; file++) {
                 CircleButton button = new CircleButton();
                 button.setPreferredSize(new Dimension(SQUARE_SIZE, SQUARE_SIZE));
-                if ((file + rank) % 2 == 1) button.setBackground(Color.gray);
+                if ((file + rank) % 2 == 1) button.setBackground(Color.GRAY);
                 button.addActionListener(new ChessButtonListener(rank=rank, file = file));
                 this.setButtonAt(new Coordinate(rank, file), button);
                 add(button);
@@ -86,6 +89,30 @@ public class ChessBoardGUI extends JFrame {
         return null;
     }
 
+    @Override
+    public void onSubscribe(Flow.Subscription subscription) {
+        this.subscription = subscription;
+    }
+
+    @Override
+    public void onNext(Move move) {
+        CircleButton fromButton = this.getButtonAt(move.getFrom()); //TODO: not pretty!
+        fromButton.setIcon(null);
+        CircleButton toButton = this.getButtonAt(move.getTo());
+        ImageIcon pieceIcon = getPieceIcon(move.getPiece());
+        toButton.setIcon(pieceIcon);
+    }
+
+    @Override
+    public void onError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
+
     private class ChessButtonListener implements ActionListener {
         private int rank;
         private int file;
@@ -113,11 +140,23 @@ public class ChessBoardGUI extends JFrame {
             } else {
                 chessBoard.movePiece(firstClickedCoord, clickedCoord);
                 chessBoard.displayBoard();
-                updateBoardUI();
+                updateButton(getButtonAt(firstClickedCoord), null);
+                updateButton(getButtonAt(clickedCoord), selectedPiece);
+                //updateBoardUI();
             }
+
+
 
         }
     }
+    public void updateButton(CircleButton button, Piece piece) {
+        if (piece != null) {
+            button.setIcon(getPieceIcon(piece));
+        } else {
+            button.setIcon(null);
+        }
+    }
+
 
     private class ChessBoardListener implements ActionListener{
 
