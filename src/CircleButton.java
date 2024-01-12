@@ -19,9 +19,9 @@ public class CircleButton extends JButton {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                isClicked = true;
+                //isClicked = true;
                 //enable buttons that correspond to generated moves
-                repaint();
+                //repaint();
             }
         });
     }

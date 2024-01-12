@@ -34,9 +34,6 @@ public class Queen extends Piece{
         for (int i = 0; i < nextCoords.size(); i++) {
             System.out.println(nextCoords.get(i).getRank() + " " + nextCoords.get(i).getFile());
         }
-
-        Bitboards bitboards = Bitboards.getInstance();
-        BitboardGame.printBitboard(bitboards.coordListToBitboard(nextCoords));
         return nextCoords;
     }
 }

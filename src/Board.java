@@ -14,47 +14,49 @@ public class Board {
         initializeBoard();
     }
 
-    public void addPiece(Piece piece, Coordinate coordinate){
+    public void setPieceAt(Piece piece, Coordinate coordinate){
         this.board[coordinate.getRank()][coordinate.getFile()] = piece;
-        piece.setPosition(coordinate);
+        if (piece != null) {
+            piece.setPosition(coordinate);
+        }
     }
 
     private void initializeBoard() {
         // Pawns
         for (int file = 0; file < 8; file++) {
-            addPiece(new Pawn(0), new Coordinate(1, file));
-            addPiece(new Pawn(1), new Coordinate(6, file));
+            setPieceAt(new Pawn(0), new Coordinate(1, file));
+            setPieceAt(new Pawn(1), new Coordinate(6, file));
             //board[1][file] = new Pawn(0); // White pawns
             //board[6][file] = new Pawn(1); // Black pawns
         }
         // Knights
-        addPiece(new Knight(0), new Coordinate(0, 1)); // White knights
-        addPiece(new Knight(0), new Coordinate(0, 6));
+        setPieceAt(new Knight(0), new Coordinate(0, 1)); // White knights
+        setPieceAt(new Knight(0), new Coordinate(0, 6));
 
-        addPiece(new Knight(1), new Coordinate(7, 1)); // Black knights
-        addPiece(new Knight(1), new Coordinate(7, 6));
+        setPieceAt(new Knight(1), new Coordinate(7, 1)); // Black knights
+        setPieceAt(new Knight(1), new Coordinate(7, 6));
 
         // Rooks
-        addPiece(new Rook(0), new Coordinate(0, 0)); // White rooks
-        addPiece(new Rook(0), new Coordinate(0, 7));
+        setPieceAt(new Rook(0), new Coordinate(0, 0)); // White rooks
+        setPieceAt(new Rook(0), new Coordinate(0, 7));
 
-        addPiece(new Rook(1), new Coordinate(7, 0)); // Black rooks
-        addPiece(new Rook(1), new Coordinate(7, 7));
+        setPieceAt(new Rook(1), new Coordinate(7, 0)); // Black rooks
+        setPieceAt(new Rook(1), new Coordinate(7, 7));
 
         // Bishops
-        addPiece(new Bishop(0), new Coordinate(0, 2)); // White bishops
-        addPiece(new Bishop(0), new Coordinate(0, 5));
+        setPieceAt(new Bishop(0), new Coordinate(0, 2)); // White bishops
+        setPieceAt(new Bishop(0), new Coordinate(0, 5));
 
-        addPiece(new Bishop(1), new Coordinate(7, 2)); // Black bishops
-        addPiece(new Bishop(1), new Coordinate(7, 5));
+        setPieceAt(new Bishop(1), new Coordinate(7, 2)); // Black bishops
+        setPieceAt(new Bishop(1), new Coordinate(7, 5));
 
         // Queens
-        addPiece(new Queen(0), new Coordinate(0, 3)); // White queen
-        addPiece(new Queen(1), new Coordinate(7, 3)); // Black queen
+        setPieceAt(new Queen(0), new Coordinate(0, 3)); // White queen
+        setPieceAt(new Queen(1), new Coordinate(7, 3)); // Black queen
 
         // Kings
-        addPiece(new King(0), new Coordinate(0, 4)); // White king
-        addPiece(new King(1), new Coordinate(7, 4)); // Black king
+        setPieceAt(new King(0), new Coordinate(0, 4)); // White king
+        setPieceAt(new King(1), new Coordinate(7, 4)); // Black king
 
         /*
         // Knights
@@ -89,10 +91,10 @@ public class Board {
     }
 
     public void displayBoard() {
-        for (int file = 0; file < 8; file++) {
-            for (int rank = 0; rank < 8; rank++) {
-                if (board[rank][file] != null) {
-                    System.out.print(board[rank][file].getFen() + " ");
+        for (int rank = 0; rank < 8; rank++) {
+            for (int file = 0; file < 8; file++) {
+                if (this.getPieceAt(new Coordinate(rank, file)) != null) {
+                    System.out.print(this.getPieceAt(new Coordinate(rank, file)).getFen() + " ");
                 } else {
                     System.out.print("- ");
                 }
@@ -103,7 +105,7 @@ public class Board {
     }
 
     public void movePiece(Coordinate from, Coordinate to) {
-        Piece pieceToMove = board[from.getRank()][from.getFile()];
+        Piece pieceToMove = this.getPieceAt(from);
 
         if (pieceToMove == null) {
             System.out.println("No piece to move at the specified position.");
@@ -114,15 +116,16 @@ public class Board {
             System.out.println("Invalid move for the selected piece.");
             return;
         }
-
-        board[to.getRank()][to.getFile()] = pieceToMove;
-        board[from.getRank()][from.getFile()] = null;
+        this.setPieceAt(pieceToMove, to);
+        this.setPieceAt(null, from);
 
         System.out.println("Piece moved successfully.");
     }
 
     public void generateMoves(Piece selectedPiece) {
         this.nextMoves = selectedPiece.generateNextMoves();
+        Bitboards bitboards = Bitboards.getInstance();
+        BitboardGame.printBitboard(bitboards.coordListToBitboard(this.nextMoves));
     }
 
     public Piece getPieceAt(Coordinate coordinate) {

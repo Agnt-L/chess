@@ -28,8 +28,6 @@ public class Rook extends Piece{
             System.out.println(nextCoords.get(i).getRank() + " " + nextCoords.get(i).getFile());
         }
 
-        Bitboards bitboards = Bitboards.getInstance();
-        BitboardGame.printBitboard(bitboards.coordListToBitboard(nextCoords));
         return nextCoords;
     }
 

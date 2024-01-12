@@ -13,6 +13,8 @@ public class ChessBoardGUI extends JFrame {
     private Board chessBoard;
 
     private Coordinate firstClickedCoord;
+    private Piece selectedPiece;
+    private List<Coordinate> nextCoords;
 
     public ChessBoardGUI(Board chessBoard) {
         super("Chess Board");
@@ -20,18 +22,26 @@ public class ChessBoardGUI extends JFrame {
         initializeGUI();
     }
 
+    public CircleButton getButtonAt(Coordinate coordinate) {
+        return this.boardButtons[coordinate.getRank()][coordinate.getFile()];
+    }
+
+    public void setButtonAt(Coordinate coordinate, CircleButton button) {
+        this.boardButtons[coordinate.getRank()][coordinate.getFile()] = button;
+    }
+
     private void initializeGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(8, 8));
         boardButtons = new CircleButton[8][8];
 
-        for (int file = 0; file < 8; file++) {
-            for (int rank = 0; rank < 8; rank++) {
+        for (int rank = 0; rank < 8; rank++) {
+            for (int file = 0; file < 8; file++) {
                 CircleButton button = new CircleButton();
                 button.setPreferredSize(new Dimension(SQUARE_SIZE, SQUARE_SIZE));
                 if ((file + rank) % 2 == 1) button.setBackground(Color.gray);
                 button.addActionListener(new ChessButtonListener(rank=rank, file = file));
-                boardButtons[file][rank] = button;
+                this.setButtonAt(new Coordinate(rank, file), button);
                 add(button);
             }
         }
@@ -43,16 +53,18 @@ public class ChessBoardGUI extends JFrame {
     }
 
     private void updateBoardUI() {
-        for (int file = 0; file < 8; file++) {
-            for (int rank = 0; rank < 8; rank++) {
-                Piece piece = chessBoard.getPieceAt(new Coordinate(file, rank));
+        for (int rank = 0; rank < 8; rank++) {
+            for (int file = 0; file < 8; file++) {
+                Coordinate coordinate = new Coordinate(rank, file);
+                Piece piece = chessBoard.getPieceAt(coordinate);
                 if (piece != null) {
-                    boardButtons[file][rank].setIcon(getPieceIcon(piece));
+                    this.getButtonAt(coordinate).setIcon(getPieceIcon(piece));
                 } else {
-                    boardButtons[file][rank].setIcon(null);
+                    this.getButtonAt(coordinate).setIcon(null);
                 }
             }
         }
+        chessBoard.displayBoard();
     }
 
     private ImageIcon getPieceIcon(Piece piece) {
@@ -89,22 +101,29 @@ public class ChessBoardGUI extends JFrame {
             // You might want to implement additional logic here based on your game requirements
             // For simplicity, this example just prints the clicked coordinates
             System.out.println("Clicked: " + rank + ", " + file);
-            if (firstClickedCoord == null) {
-                firstClickedCoord = new Coordinate(rank, file);
-                Piece selectedPiece = chessBoard.getPieceAt(new Coordinate(rank, file));
+            Coordinate clickedCoord = new Coordinate(rank, file);
+            if (chessBoard.getPieceAt(clickedCoord) != null) {
+                firstClickedCoord = clickedCoord;
+                selectedPiece = chessBoard.getPieceAt(clickedCoord);
                 chessBoard.generateMoves(selectedPiece);
-                List<Coordinate> nextCoords = chessBoard.getNextMoves();
+                nextCoords = chessBoard.getNextMoves();
                 for (Coordinate coord: nextCoords) {
-                    boardButtons[coord.getFile()][coord.getRank()].setClicked(true);
+                    boardButtons[coord.getRank()][coord.getFile()].setClicked(true);
                 }
-
             } else {
-                chessBoard.movePiece(firstClickedCoord, new Coordinate(rank, file));
+                chessBoard.movePiece(firstClickedCoord, clickedCoord);
                 chessBoard.displayBoard();
                 updateBoardUI();
-                firstClickedCoord = null;
             }
 
+        }
+    }
+
+    private class ChessBoardListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("ACTION!");
         }
     }
 
