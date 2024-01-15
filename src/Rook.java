@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Rook extends Piece{
@@ -21,8 +22,7 @@ public class Rook extends Piece{
             System.out.println(coord.getRank());
         }
         // remove current field
-        nextCoords.remove(coord);
-        nextCoords.remove(coord);
+        nextCoords.removeAll(Collections.singleton(coord));
 
         for (int i = 0; i < nextCoords.size(); i++) {
             System.out.println(nextCoords.get(i).getRank() + " " + nextCoords.get(i).getFile());

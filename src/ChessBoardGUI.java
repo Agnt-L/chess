@@ -2,25 +2,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Ellipse2D;
-import java.awt.image.BufferedImage;
 import java.util.List;
-import java.util.concurrent.Flow;
 
-public class ChessBoardGUI extends JFrame implements Flow.Subscriber<Move> {
+public class ChessBoardGUI extends JFrame {
     private static final int SQUARE_SIZE = 80;
     private static final int ICON_SIZE = (int) (0.85 * SQUARE_SIZE);
     private CircleButton[][] boardButtons;
-    private Board chessBoard;
+    private final Board chessBoard;
 
     private Coordinate firstClickedCoord;
     private Piece selectedPiece;
-    private List<Coordinate> nextCoords;
-    private Flow.Subscription subscription;
 
     public ChessBoardGUI(Board chessBoard) {
         super("Chess Board");
-        chessBoard.subscribe(this);
         this.chessBoard = chessBoard;
         initializeGUI();
     }
@@ -43,7 +37,7 @@ public class ChessBoardGUI extends JFrame implements Flow.Subscriber<Move> {
                 CircleButton button = new CircleButton();
                 button.setPreferredSize(new Dimension(SQUARE_SIZE, SQUARE_SIZE));
                 if ((file + rank) % 2 == 1) button.setBackground(Color.GRAY);
-                button.addActionListener(new ChessButtonListener(rank=rank, file = file));
+                button.addActionListener(new ChessButtonListener(rank, file));
                 this.setButtonAt(new Coordinate(rank, file), button);
                 add(button);
             }
@@ -85,34 +79,6 @@ public class ChessBoardGUI extends JFrame implements Flow.Subscriber<Move> {
         return icon;
     }
 
-    public Coordinate getButtonCoordinate(JButton clickedButton) {
-        return null;
-    }
-
-    @Override
-    public void onSubscribe(Flow.Subscription subscription) {
-        this.subscription = subscription;
-    }
-
-    @Override
-    public void onNext(Move move) {
-        CircleButton fromButton = this.getButtonAt(move.getFrom()); //TODO: not pretty!
-        fromButton.setIcon(null);
-        CircleButton toButton = this.getButtonAt(move.getTo());
-        ImageIcon pieceIcon = getPieceIcon(move.getPiece());
-        toButton.setIcon(pieceIcon);
-    }
-
-    @Override
-    public void onError(Throwable throwable) {
-
-    }
-
-    @Override
-    public void onComplete() {
-
-    }
-
     private class ChessButtonListener implements ActionListener {
         private int rank;
         private int file;
@@ -129,11 +95,16 @@ public class ChessBoardGUI extends JFrame implements Flow.Subscriber<Move> {
             // For simplicity, this example just prints the clicked coordinates
             System.out.println("Clicked: " + rank + ", " + file);
             Coordinate clickedCoord = new Coordinate(rank, file);
+            if (chessBoard.getNextMoves() != null) {
+                for (Coordinate coord: chessBoard.getNextMoves()) {
+                    boardButtons[coord.getRank()][coord.getFile()].setClicked(false);
+                }
+            }
             if (chessBoard.getPieceAt(clickedCoord) != null) {
                 firstClickedCoord = clickedCoord;
                 selectedPiece = chessBoard.getPieceAt(clickedCoord);
                 chessBoard.generateMoves(selectedPiece);
-                nextCoords = chessBoard.getNextMoves();
+                List<Coordinate> nextCoords = chessBoard.getNextMoves();
                 for (Coordinate coord: nextCoords) {
                     boardButtons[coord.getRank()][coord.getFile()].setClicked(true);
                 }

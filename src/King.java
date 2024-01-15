@@ -17,7 +17,35 @@ public class King extends Piece{
 
     @Override
     public List<Coordinate> generateNextMoves() {
+        Coordinate coord = this.getPosition();
         List<Coordinate> nextCoords = new ArrayList<>();
+        int rank = coord.getRank();
+        int file = coord.getFile();
+        if (rank != 7) {
+            if (file != 7) {
+                nextCoords.add(new Coordinate(rank + 1, file + 1));
+            }
+            nextCoords.add(new Coordinate(rank + 1, file));
+            if (file != 0) {
+                nextCoords.add(new Coordinate(rank + 1, file - 1));
+            }
+        }
+        if (rank != 0) {
+            if (file != 7) {
+                nextCoords.add(new Coordinate(rank - 1, file + 1));
+            }
+            nextCoords.add(new Coordinate(rank - 1, file));
+            if (file != 0) {
+                nextCoords.add(new Coordinate(rank - 1, file - 1));
+            }
+
+        }
+        if (file != 7) {
+            nextCoords.add(new Coordinate(rank, file + 1));
+        }
+        if (file != 0) {
+            nextCoords.add(new Coordinate(rank, file - 1));
+        }
         return nextCoords;
     }
 }

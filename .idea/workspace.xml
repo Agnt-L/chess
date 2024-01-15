@@ -4,13 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a65c95f4-b7d2-44fd-aaa2-db0dc2d30686" name="Changes" comment="correct Java-2d-array and JButton-array rank and file again, make getter and setter for their fields">
-      <change afterPath="$PROJECT_DIR$/src/Move.java" afterDir="false" />
+    <list default="true" id="a65c95f4-b7d2-44fd-aaa2-db0dc2d30686" name="Changes" comment="update only CircleButtons that are affected by a Move, implemented Flow pattern to notify GUI of model changes but probably unnecessary since Swing has VC-M architecture">
+      <change afterPath="$PROJECT_DIR$/src/DiagonalSlider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bishop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BitboardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BitboardGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Bitboards.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bitboards.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChessBoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessBoardGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CircleButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CircleButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CircleButtonMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DualIcon.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DualIconButton.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/King.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Queen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rook.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,22 +52,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ChessBoardGUI">
+  <component name="RunManager" selected="Application.BitboardGame">
     <configuration name="BitboardGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="BitboardGame" />
+      <module name="chess" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Bitboards" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Bitboards" />
       <module name="chess" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -84,20 +101,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="chess" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.BitboardGame" />
+        <item itemvalue="Application.Bitboards" />
         <item itemvalue="Application.ChessBoardGUI" />
         <item itemvalue="Application.CircleButtonMain" />
         <item itemvalue="Application.DualIconButton" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.BitboardGame" />
       </list>
     </recent_temporary>
   </component>
@@ -138,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705056546293</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update only CircleButtons that are affected by a Move, implemented Flow pattern to notify GUI of model changes but probably unnecessary since Swing has VC-M architecture">
+      <created>1705074602194</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1705074602194</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,7 +174,8 @@
     <MESSAGE value="try to display generated next moves and translate them to bitboards" />
     <MESSAGE value="correct Java-2d-array and JButton-array rank and file" />
     <MESSAGE value="correct Java-2d-array and JButton-array rank and file again, make getter and setter for their fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="correct Java-2d-array and JButton-array rank and file again, make getter and setter for their fields" />
+    <MESSAGE value="update only CircleButtons that are affected by a Move, implemented Flow pattern to notify GUI of model changes but probably unnecessary since Swing has VC-M architecture" />
+    <option name="LAST_COMMIT_MESSAGE" value="update only CircleButtons that are affected by a Move, implemented Flow pattern to notify GUI of model changes but probably unnecessary since Swing has VC-M architecture" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -168,33 +186,28 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/BitboardGame.java</url>
-          <line>18</line>
+          <line>16</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/DualIcon.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ChessBoardGUI.java</url>
-          <line>49</line>
+          <line>43</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ChessBoardGUI.java</url>
-          <line>93</line>
-          <option name="timeStamp" value="48" />
+          <url>file://$PROJECT_DIR$/src/Queen.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ChessBoardGUI.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="49" />
+          <url>file://$PROJECT_DIR$/src/Queen.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ChessBoardGUI.java</url>
-          <line>98</line>
-          <option name="timeStamp" value="50" />
+          <url>file://$PROJECT_DIR$/src/Knight.java</url>
+          <line>64</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

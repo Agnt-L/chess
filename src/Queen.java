@@ -5,7 +5,7 @@ import java.util.List;
 
 import static java.lang.Math.abs;
 
-public class Queen extends Piece{
+public class Queen extends Piece {
     public Queen(int color) {
         super(color, "q");
     }
@@ -24,9 +24,36 @@ public class Queen extends Piece{
         for(int i=0; i<8; i++) {
             nextCoords.add(new Coordinate(coord.getRank(), i));
             nextCoords.add(new Coordinate(i, coord.getFile()));
-            nextCoords.add(new Coordinate((coord.getRank()+i) % 8, (coord.getFile()+i) % 8));
-            nextCoords.add(new Coordinate((coord.getRank()+i) % 8, (coord.getFile()-i) % 8));
-            System.out.println(coord.getRank());
+        }
+        int rank = coord.getRank();
+        int file = coord.getFile();
+        while (rank != 8 && file != 8) {
+            nextCoords.add(new Coordinate(rank, file));
+            rank++;
+            file++;
+        }
+        rank = coord.getRank();
+        file = coord.getFile();
+        while (rank != 8 && file != -1) {
+            nextCoords.add(new Coordinate(rank, file));
+            rank++;
+            file--;
+        }
+
+        rank = coord.getRank();
+        file = coord.getFile();
+        while (rank != -1 && file != 8) {
+            nextCoords.add(new Coordinate(rank, file));
+            rank--;
+            file++;
+        }
+
+        rank = coord.getRank();
+        file = coord.getFile();
+        while (rank != -1 && file != -1) {
+            nextCoords.add(new Coordinate(rank, file));
+            rank--;
+            file--;
         }
         // remove current field
         nextCoords.removeAll(Collections.singleton(coord));

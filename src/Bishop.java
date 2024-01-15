@@ -17,7 +17,41 @@ public class Bishop extends Piece{
 
     @Override
     public List<Coordinate> generateNextMoves() {
+        Coordinate coord = this.getPosition();
         List<Coordinate> nextCoords = new ArrayList<>();
+
+        int rank = coord.getRank();
+        int file = coord.getFile();
+
+        while (rank != 8 && file != 8) {
+            nextCoords.add(new Coordinate(rank, file));
+            rank++;
+            file++;
+        }
+        rank = coord.getRank();
+        file = coord.getFile();
+        while (rank != 8 && file != -1) {
+            nextCoords.add(new Coordinate(rank, file));
+            rank++;
+            file--;
+        }
+
+        rank = coord.getRank();
+        file = coord.getFile();
+        while (rank != -1 && file != 8) {
+            nextCoords.add(new Coordinate(rank, file));
+            rank--;
+            file++;
+        }
+
+        rank = coord.getRank();
+        file = coord.getFile();
+        while (rank != -1 && file != -1) {
+            nextCoords.add(new Coordinate(rank, file));
+            rank--;
+            file--;
+
+        }
         return nextCoords;
     }
 }

@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.concurrent.Flow;
 
-public class CircleButton extends JButton implements Flow.Subscriber<Piece> {
+public class CircleButton extends JButton {
 
     private final int circleRadius = 20;
 
@@ -44,20 +44,6 @@ public class CircleButton extends JButton implements Flow.Subscriber<Piece> {
         }
     }
 
-    @Override
-    public void onSubscribe(Flow.Subscription subscription) {
-        this.subscription = subscription;
-        subscription.request(1);
-    }
-
-    @Override
-    public void onNext(Piece piece) {
-        ImageIcon icon = getPieceIcon(piece);
-        this.setIcon(icon);
-        System.out.println("NEXT!!!");
-        subscription.request(1);
-    }
-
     private ImageIcon getPieceIcon(Piece piece) {
         String pieceType = piece.getClass().getSimpleName().toLowerCase();
         String color = (piece.getColor() == 0) ? "white" : "black";
@@ -71,15 +57,5 @@ public class CircleButton extends JButton implements Flow.Subscriber<Piece> {
         ImageIcon icon = new ImageIcon(newImg);
 
         return icon;
-    }
-
-    @Override
-    public void onError(Throwable throwable) {
-        throwable.printStackTrace();
-    }
-
-    @Override
-    public void onComplete() {
-        System.out.println("Done");
     }
 }
