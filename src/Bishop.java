@@ -5,7 +5,7 @@ import static java.lang.Math.abs;
 
 public class Bishop extends Piece{
     public Bishop(int color) {
-        super(color, "b");
+        super(color, "b", 2);
     }
 
     @Override

@@ -5,7 +5,7 @@ import static java.lang.Math.abs;
 
 public class King extends Piece{
     public King(int color) {
-        super(color, "k");
+        super(color, "k", 5);
     }
 
     @Override

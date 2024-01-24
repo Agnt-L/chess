@@ -5,117 +5,20 @@ import java.util.List;
 public class Bitboards {
     private static final Bitboards OBJ = new Bitboards();
 
-    private long black_pawn = 0b0000000000000000000000000000000000000000000000001111111100000000L;
-    private long black_rook = 0b0000000000000000000000000000000000000000000000000000000010000001L;
-    private long black_knight = 0b0000000000000000000000000000000000000000000000000000000001000010L;
-
-    public long getBlack_pawn() {
-        return black_pawn;
-    }
-
-    public void setBlack_pawn(long black_pawn) {
-        this.black_pawn = black_pawn;
-    }
-
-    public long getBlack_rook() {
-        return black_rook;
-    }
-
-    public void setBlack_rook(long black_rook) {
-        this.black_rook = black_rook;
-    }
-
-    public long getBlack_knight() {
-        return black_knight;
-    }
-
-    public void setBlack_knight(long black_knight) {
-        this.black_knight = black_knight;
-    }
-
-    public long getBlack_bishop() {
-        return black_bishop;
-    }
-
-    public void setBlack_bishop(long black_bishop) {
-        this.black_bishop = black_bishop;
-    }
-
-    public long getBlack_queen() {
-        return black_queen;
-    }
-
-    public void setBlack_queen(long black_queen) {
-        this.black_queen = black_queen;
-    }
-
-    public long getBlack_king() {
-        return black_king;
-    }
-
-    public void setBlack_king(long black_king) {
-        this.black_king = black_king;
-    }
-
-    public long getWhite_pawn() {
-        return white_pawn;
-    }
-
-    public void setWhite_pawn(long white_pawn) {
-        this.white_pawn = white_pawn;
-    }
-
-    public long getWhite_rook() {
-        return white_rook;
-    }
-
-    public void setWhite_rook(long white_rook) {
-        this.white_rook = white_rook;
-    }
-
-    public long getWhite_knight() {
-        return white_knight;
-    }
-
-    public void setWhite_knight(long white_knight) {
-        this.white_knight = white_knight;
-    }
-
-    public long getWhite_bishop() {
-        return white_bishop;
-    }
-
-    public void setWhite_bishop(long white_bishop) {
-        this.white_bishop = white_bishop;
-    }
-
-    public long getWhite_queen() {
-        return white_queen;
-    }
-
-    public void setWhite_queen(long white_queen) {
-        this.white_queen = white_queen;
-    }
-
-    public long getWhite_king() {
-        return white_king;
-    }
-
-    public void setWhite_king(long white_king) {
-        this.white_king = white_king;
-    }
-
-    private long black_bishop = 0b00100100L;
-    private long black_queen = 0b00001000L;
-    private long black_king = 0b00010000L;
-
-    private long white_pawn = 0b11111111000000000000000000000000000000000000000000000000L;
-    private long white_rook = 0b1000000100000000000000000000000000000000000000000000000000000000L;
-    private long white_knight = 0b0100001000000000000000000000000000000000000000000000000000000000L;
-    private long white_bishop = 0b0010010000000000000000000000000000000000000000000000000000000000L;
-    private long white_queen = 0b0000100000000000000000000000000000000000000000000000000000000000L;
-    private long white_king = 0b1000000000000000000000000000000000000000000000000000000000000L;
-
+    Long[] bitboards = new Long[] {
+        0b11111111000000000000000000000000000000000000000000000000L, // white pawns
+        0b0100001000000000000000000000000000000000000000000000000000000000L, // white knights
+        0b0010010000000000000000000000000000000000000000000000000000000000L, // white bishops
+        0b1000000100000000000000000000000000000000000000000000000000000000L, // white rooks
+        0b0000100000000000000000000000000000000000000000000000000000000000L, // white queen
+        0b1000000000000000000000000000000000000000000000000000000000000L, // white king
+        0b0000000000000000000000000000000000000000000000001111111100000000L, // black pawns
+        0b0000000000000000000000000000000000000000000000000000000001000010L, // black knights
+        0b00100100L, // black bishops
+        0b0000000000000000000000000000000000000000000000000000000010000001L, // black rooks
+        0b00001000L, // black queen
+        0b00010000L // black king
+    };
 
     private Bitboards() {
     }
@@ -177,5 +80,11 @@ public class Bitboards {
         }
         System.out.println();
         System.out.println();
+    }
+    public void movePiece(Piece piece, Coordinate to) {
+        int bitboardIndex = piece.getIndex() * (piece.getColor() + 1);
+        int positionIndex = to.getRank() * 8 + to.getFile();
+        this.bitboards[bitboardIndex]  = this.bitboards[bitboardIndex] | (long) 1 << positionIndex;
+        printBitboard(this.bitboards[bitboardIndex]);
     }
 }

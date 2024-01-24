@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.concurrent.Flow;
 
 public abstract class Piece {
     private int color;
@@ -16,9 +15,12 @@ public abstract class Piece {
 
     private final String fenLetter;
 
-    public Piece(int color, String fenLetter) {
+    private final int index;
+
+    public Piece(int color, String fenLetter, int index) {
         this.color = color;
         this.fenLetter = fenLetter;
+        this.index = index;
     }
 
     public String getFen() {
@@ -27,6 +29,10 @@ public abstract class Piece {
         } else {
             return fenLetter;
         }
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     public abstract boolean isValidMove(Coordinate from, Coordinate to);

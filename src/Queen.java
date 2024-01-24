@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -7,8 +6,10 @@ import static java.lang.Math.abs;
 
 public class Queen extends Piece {
     public Queen(int color) {
-        super(color, "q");
+        super(color, "q", 4);
     }
+
+
 
     @Override
     public boolean isValidMove(Coordinate from, Coordinate to) {

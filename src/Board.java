@@ -2,16 +2,19 @@ import java.util.List;
 
 public class Board{
     private final Piece[][] board;
+    private int player;
 
     public List<Coordinate> getNextMoves() {
         return nextMoves;
     }
 
     private List<Coordinate> nextMoves;
+    private Bitboards bitboards;
 
     public Board() {
         this.board = new Piece[8][8];
         initializeBoard();
+        this.bitboards = Bitboards.getInstance();
     }
 
     public void setPieceAt(Piece piece, Coordinate coordinate){
@@ -72,21 +75,23 @@ public class Board{
     }
 
     public void movePiece(Coordinate from, Coordinate to) {
+        System.out.println("Player " + this.player + " made the last turn.");
         Piece pieceToMove = this.getPieceAt(from);
 
-        if (pieceToMove == null) {
-            System.out.println("No piece to move at the specified position.");
-            return;
-        }
-
-        if (!pieceToMove.isValidMove(from, to)) {
-            System.out.println("Invalid move for the selected piece.");
-            return;
-        }
         this.setPieceAt(pieceToMove, to);
         this.setPieceAt(null, from);
+        this.bitboards.movePiece(pieceToMove, to);
 
-        System.out.println("Piece moved successfully.");
+        this.player = 1 + this.player * (-1);
+    }
+
+    public boolean isValidMove(Coordinate from, Coordinate to) {
+        Piece pieceToMove = this.getPieceAt(from);
+        if (pieceToMove == null || this.player != pieceToMove.getColor()) {
+            return false;
+        } else {
+            return pieceToMove.isValidMove(from, to);
+        }
     }
 
     public void generateMoves(Piece selectedPiece) {

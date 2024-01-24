@@ -90,29 +90,26 @@ public class ChessBoardGUI extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Handle button click event (e.g., move a piece)
-            // You might want to implement additional logic here based on your game requirements
-            // For simplicity, this example just prints the clicked coordinates
+            // prints the clicked coordinates
             System.out.println("Clicked: " + rank + ", " + file);
             Coordinate clickedCoord = new Coordinate(rank, file);
-            if (chessBoard.getNextMoves() != null) {
-                for (Coordinate coord: chessBoard.getNextMoves()) {
-                    boardButtons[coord.getRank()][coord.getFile()].setClicked(false);
-                }
-            }
+
+            unmarkNextFields();
             if (chessBoard.getPieceAt(clickedCoord) != null) {
                 firstClickedCoord = clickedCoord;
                 selectedPiece = chessBoard.getPieceAt(clickedCoord);
                 chessBoard.generateMoves(selectedPiece);
                 List<Coordinate> nextCoords = chessBoard.getNextMoves();
                 for (Coordinate coord: nextCoords) {
-                    boardButtons[coord.getRank()][coord.getFile()].setClicked(true);
+                    boardButtons[coord.getRank()][coord.getFile()].setMarked(true);
                 }
             } else {
-                chessBoard.movePiece(firstClickedCoord, clickedCoord);
-                chessBoard.displayBoard();
-                updateButton(getButtonAt(firstClickedCoord), null);
-                updateButton(getButtonAt(clickedCoord), selectedPiece);
+                if (chessBoard.isValidMove(firstClickedCoord, clickedCoord)) {
+                    chessBoard.movePiece(firstClickedCoord, clickedCoord);
+                    chessBoard.displayBoard();
+                    updateButton(getButtonAt(firstClickedCoord), null);
+                    updateButton(getButtonAt(clickedCoord), selectedPiece);
+                }
                 //updateBoardUI();
             }
 
@@ -120,6 +117,15 @@ public class ChessBoardGUI extends JFrame {
 
         }
     }
+
+    private void unmarkNextFields() {
+        if (chessBoard.getNextMoves() != null) {
+            for (Coordinate coord: chessBoard.getNextMoves()) {
+                boardButtons[coord.getRank()][coord.getFile()].setMarked(false);
+            }
+        }
+    }
+
     public void updateButton(CircleButton button, Piece piece) {
         if (piece != null) {
             button.setIcon(getPieceIcon(piece));

@@ -11,7 +11,7 @@ public class CircleButton extends JButton {
     private static final int ICON_SIZE = (int) (0.85 * SQUARE_SIZE);
     private Flow.Subscription subscription;
 
-    public void setClicked(boolean clicked) {
+    public void setMarked(boolean clicked) {
         isClicked = clicked;
         repaint();
     }
