@@ -4,20 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a65c95f4-b7d2-44fd-aaa2-db0dc2d30686" name="Changes" comment="clean up move generation, make bitboards for all the piece types">
+    <list default="true" id="a65c95f4-b7d2-44fd-aaa2-db0dc2d30686" name="Changes" comment="make move generation for all the pieces, tried to clean up actionPerformed of ChessButtonListener a bit, implemented players">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bishop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BitboardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BitboardGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Bitboards.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bitboards.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChessBoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessBoardGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CircleButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CircleButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/King.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Knight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Queen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rook.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +44,10 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -159,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705353444736</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="make move generation for all the pieces, tried to clean up actionPerformed of ChessButtonListener a bit, implemented players">
+      <created>1706114057898</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1706114057899</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -180,7 +180,8 @@
     <MESSAGE value="correct Java-2d-array and JButton-array rank and file again, make getter and setter for their fields" />
     <MESSAGE value="update only CircleButtons that are affected by a Move, implemented Flow pattern to notify GUI of model changes but probably unnecessary since Swing has VC-M architecture" />
     <MESSAGE value="clean up move generation, make bitboards for all the piece types" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up move generation, make bitboards for all the piece types" />
+    <MESSAGE value="make move generation for all the pieces, tried to clean up actionPerformed of ChessButtonListener a bit, implemented players" />
+    <option name="LAST_COMMIT_MESSAGE" value="make move generation for all the pieces, tried to clean up actionPerformed of ChessButtonListener a bit, implemented players" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -216,13 +217,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Bitboards.java</url>
-          <line>87</line>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Pawn.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="59" />
+          <line>95</line>
+          <option name="timeStamp" value="61" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -17,7 +17,9 @@ public class Bitboards {
         0b00100100L, // black bishops
         0b0000000000000000000000000000000000000000000000000000000010000001L, // black rooks
         0b00001000L, // black queen
-        0b00010000L // black king
+        0b00010000L, // black king
+        0b1111111111111111000000000000000000000000000000000000000000000000L, // white pieces
+        0b1111111111111111L, // black pieces
     };
 
     private Bitboards() {
@@ -83,8 +85,23 @@ public class Bitboards {
     }
     public void movePiece(Piece piece, Coordinate to) {
         int bitboardIndex = piece.getIndex() * (piece.getColor() + 1);
-        int positionIndex = to.getRank() * 8 + to.getFile();
-        this.bitboards[bitboardIndex]  = this.bitboards[bitboardIndex] | (long) 1 << positionIndex;
+        int fromIndex = piece.getPosition().getRank() * 8 + piece.getPosition().getFile();
+        int toIndex = to.getRank() * 8 + to.getFile();
+        int generalBitboardIndex = 12 + piece.getColor();
+
+        // add 1 at new piece position in piece bitboard
+        this.bitboards[bitboardIndex]  = this.bitboards[bitboardIndex] | (long) 1 << 64 - toIndex;
         printBitboard(this.bitboards[bitboardIndex]);
+        // remove 1 at previous piece position in piece bitboard
+        this.bitboards[bitboardIndex]  = this.bitboards[bitboardIndex] ^ (long) 1 << 64 - fromIndex;
+        // add 1 at new piece position in player bitboard
+        printBitboard(this.bitboards[bitboardIndex]);
+        this.bitboards[generalBitboardIndex]  = this.bitboards[generalBitboardIndex] | (long) 1 << 64 - toIndex;
+        printBitboard(this.bitboards[generalBitboardIndex]);
+        // remove 1 at new piece position in player bitboard
+        this.bitboards[generalBitboardIndex]  = this.bitboards[generalBitboardIndex] ^ (long) 1 << 64 - fromIndex;
+        printBitboard(this.bitboards[generalBitboardIndex]);
+
+        System.out.println("bitboards");
     }
 }

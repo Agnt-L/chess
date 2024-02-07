@@ -78,9 +78,9 @@ public class Board{
         System.out.println("Player " + this.player + " made the last turn.");
         Piece pieceToMove = this.getPieceAt(from);
 
+        this.bitboards.movePiece(pieceToMove, to);
         this.setPieceAt(pieceToMove, to);
         this.setPieceAt(null, from);
-        this.bitboards.movePiece(pieceToMove, to);
 
         this.player = 1 + this.player * (-1);
     }
