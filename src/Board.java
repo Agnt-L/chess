@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.List;
 
 public class Board{
@@ -9,6 +10,11 @@ public class Board{
     }
 
     private List<Coordinate> nextMoves;
+
+    public Bitboards getBitboards() {
+        return bitboards;
+    }
+
     private Bitboards bitboards;
 
     public Board() {
@@ -52,12 +58,12 @@ public class Board{
         setPieceAt(new Bishop(1), new Coordinate(7, 5));
 
         // Queens
-        setPieceAt(new Queen(0), new Coordinate(0, 3)); // White queen
-        setPieceAt(new Queen(1), new Coordinate(7, 3)); // Black queen
+        setPieceAt(new Queen(0), new Coordinate(0, 4)); // White queen
+        setPieceAt(new Queen(1), new Coordinate(7, 4)); // Black queen
 
         // Kings
-        setPieceAt(new King(0), new Coordinate(0, 4)); // White king
-        setPieceAt(new King(1), new Coordinate(7, 4)); // Black king
+        setPieceAt(new King(0), new Coordinate(0, 3)); // White king
+        setPieceAt(new King(1), new Coordinate(7, 3)); // Black king
     }
 
     public void displayBoard() {
@@ -97,7 +103,8 @@ public class Board{
     public void generateMoves(Piece selectedPiece) {
         this.nextMoves = selectedPiece.generateNextMoves();
         Bitboards bitboards = Bitboards.getInstance();
-        bitboards.printBitboard(bitboards.coordListToBitboard(this.nextMoves));
+        BigInteger nextMovesBitboard = bitboards.coordListToBitboard(this.nextMoves);
+        bitboards.printBitboard(nextMovesBitboard);
     }
 
     public Piece getPieceAt(Coordinate coordinate) {

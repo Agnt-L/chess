@@ -1,5 +1,8 @@
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Bitboards {
@@ -11,11 +14,11 @@ public class Bitboards {
         0b0010010000000000000000000000000000000000000000000000000000000000L, // white bishops
         0b1000000100000000000000000000000000000000000000000000000000000000L, // white rooks
         0b0000100000000000000000000000000000000000000000000000000000000000L, // white queen
-        0b1000000000000000000000000000000000000000000000000000000000000L, // white king
-        0b0000000000000000000000000000000000000000000000001111111100000000L, // black pawns
-        0b0000000000000000000000000000000000000000000000000000000001000010L, // black knights
+        0b0001000000000000000000000000000000000000000000000000000000000000L, // white king
+        0b1111111100000000L, // black pawns
+        0b01000010L, // black knights
         0b00100100L, // black bishops
-        0b0000000000000000000000000000000000000000000000000000000010000001L, // black rooks
+        0b10000001L, // black rooks
         0b00001000L, // black queen
         0b00010000L, // black king
         0b1111111111111111000000000000000000000000000000000000000000000000L, // white pieces
@@ -84,24 +87,33 @@ public class Bitboards {
         System.out.println();
     }
     public void movePiece(Piece piece, Coordinate to) {
-        int bitboardIndex = piece.getIndex() * (piece.getColor() + 1);
+        int bitboardIndex = piece.getIndex() + 6 * piece.getColor();
         int fromIndex = piece.getPosition().getRank() * 8 + piece.getPosition().getFile();
         int toIndex = to.getRank() * 8 + to.getFile();
         int generalBitboardIndex = 12 + piece.getColor();
+        System.out.println("from");
+        printBitboard((long) 1 << 64 - fromIndex);
+        System.out.println();
+        System.out.println("to");
+        printBitboard((long) 1 << 64 - toIndex);
 
         // add 1 at new piece position in piece bitboard
-        this.bitboards[bitboardIndex]  = this.bitboards[bitboardIndex] | (long) 1 << 64 - toIndex;
-        printBitboard(this.bitboards[bitboardIndex]);
+        this.bitboards[bitboardIndex]  = this.bitboards[bitboardIndex] | (long) 1 << 63 - toIndex;
         // remove 1 at previous piece position in piece bitboard
-        this.bitboards[bitboardIndex]  = this.bitboards[bitboardIndex] ^ (long) 1 << 64 - fromIndex;
+        this.bitboards[bitboardIndex]  = this.bitboards[bitboardIndex] ^ (long) 1 << 63 - fromIndex;
         // add 1 at new piece position in player bitboard
-        printBitboard(this.bitboards[bitboardIndex]);
-        this.bitboards[generalBitboardIndex]  = this.bitboards[generalBitboardIndex] | (long) 1 << 64 - toIndex;
-        printBitboard(this.bitboards[generalBitboardIndex]);
+        this.bitboards[generalBitboardIndex]  = this.bitboards[generalBitboardIndex] | (long) 1 << 63 - toIndex;
         // remove 1 at new piece position in player bitboard
-        this.bitboards[generalBitboardIndex]  = this.bitboards[generalBitboardIndex] ^ (long) 1 << 64 - fromIndex;
-        printBitboard(this.bitboards[generalBitboardIndex]);
+        this.bitboards[generalBitboardIndex]  = this.bitboards[generalBitboardIndex] ^ (long) 1 << 63 - fromIndex;
 
         System.out.println("bitboards");
+        printBitboard(this.bitboards[bitboardIndex]);
+        printBitboard(this.bitboards[generalBitboardIndex]);
+    }
+
+    public List<String> getBitboardNames() {
+        return new ArrayList<>(Arrays.asList("white pawns", "white knights", "white bishops", "white rooks", "white queen", "white king"
+            , "black pawns", "black knights", "black bishops", "black rooks", "black queen", "black king, ",
+            "white pieces", "black pieces"));
     }
 }

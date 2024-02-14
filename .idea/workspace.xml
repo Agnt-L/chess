@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a65c95f4-b7d2-44fd-aaa2-db0dc2d30686" name="Changes" comment="make move generation for all the pieces, tried to clean up actionPerformed of ChessButtonListener a bit, implemented players">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="a65c95f4-b7d2-44fd-aaa2-db0dc2d30686" name="Changes" comment="fixing piece moves in Bitboards">
+      <change afterPath="$PROJECT_DIR$/src/BitboardGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Bitboards.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bitboards.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +56,14 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ChessBoardGUI">
+  <component name="RunManager" selected="Application.BitboardGUI">
+    <configuration name="BitboardGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="BitboardGUI" />
+      <module name="chess" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BitboardGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="BitboardGame" />
       <module name="chess" />
@@ -84,20 +92,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DualIconButton" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DualIconButton" />
-      <module name="chess" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.BitboardGUI" />
         <item itemvalue="Application.ChessBoardGUI" />
         <item itemvalue="Application.BitboardGame" />
         <item itemvalue="Application.Bitboards" />
         <item itemvalue="Application.CircleButtonMain" />
-        <item itemvalue="Application.DualIconButton" />
       </list>
     </recent_temporary>
   </component>
@@ -159,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1706114057899</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fixing piece moves in Bitboards">
+      <created>1707311347395</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1707311347395</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -181,7 +189,8 @@
     <MESSAGE value="update only CircleButtons that are affected by a Move, implemented Flow pattern to notify GUI of model changes but probably unnecessary since Swing has VC-M architecture" />
     <MESSAGE value="clean up move generation, make bitboards for all the piece types" />
     <MESSAGE value="make move generation for all the pieces, tried to clean up actionPerformed of ChessButtonListener a bit, implemented players" />
-    <option name="LAST_COMMIT_MESSAGE" value="make move generation for all the pieces, tried to clean up actionPerformed of ChessButtonListener a bit, implemented players" />
+    <MESSAGE value="fixing piece moves in Bitboards" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing piece moves in Bitboards" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -217,14 +226,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Bitboards.java</url>
-          <line>95</line>
-          <option name="timeStamp" value="61" />
+          <line>90</line>
+          <option name="timeStamp" value="66" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="nextCoords" language="JAVA" />
+        <watch expression="this.bitboards[bitboardIndex].value" />
+        <watch expression="this.bitboards[bitboardIndex].value" />
+        <watch expression="bitboardSelector.selectingItem" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
